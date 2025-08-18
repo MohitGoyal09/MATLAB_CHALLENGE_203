@@ -54,9 +54,12 @@ Our initial goal was to create the simplest possible automation algorithm using 
 
 #### Results and Analysis
 
-This baseline demonstrated the basic principle of automation but suffered from fundamental limitations, as shown in Figure 1. The tracker frequently lost the target on low-contrast vehicles and was incapable of detecting new objects, making it unsuitable for efficient labeling.
+This baseline demonstrated the basic principle of automation but suffered from fundamental limitations, as shown in following table. The tracker frequently lost the target on low-contrast vehicles and was incapable of detecting new objects, making it unsuitable for efficient labeling.
 
-> **Figure 1:** Drifting Failure. The simple optical flow tracker drifts from its target due to a lack of object awareness. The bounding box remains static while the vehicle moves forward.
+| **Step 1: Setup** | **Step 2: Initial Success** | **Step 3: Drifting Failure** |
+|:---:|:---:|:---:|
+| ![Setup](media/1a.jpg) | ![Initial Success](media/1b.jpg) | ![Failure](media/1c.jpg) |
+| **Figure 1a:** The algorithm requires manual initialization with a user-defined ROI on the starting frame. | **Figure 1b:** The tracker appears to follow the high-contrast vehicle correctly for a short duration. | **Figure 1c:** The tracker quickly loses the object's true shape and drifts, demonstrating a lack of robustness. |
 
 ### 3.2 Baseline 2: Deep Learning Object Detection and Tracking
 
@@ -64,13 +67,34 @@ This baseline demonstrated the basic principle of automation but suffered from f
 
 #### Motivation & Technical Approach
 
-To address the limitations of the optical flow tracker, we built a fully automatic "tracking-by-detection" system. This algorithm uses two powerful components: a pre-trained YOLO v4 deep learning model (`yolov4ObjectDetector`) to find vehicles in each frame, and a Kalman Filter to maintain a smooth and stable track for each detected object over time.
+To address the critical limitations of the optical flow tracker, our next step was to build a fully automatic "tracking-by-detection" system. We moved from a classical "tracking-only" approach to a modern deep learning paradigm, leveraging the power of YOLO v4 to provide the object awareness that the first baseline lacked.
+
+This algorithm combines two powerful components:
+
+- **YOLO v4 Detector:** The `yolov4ObjectDetector` identifies vehicles in each frame, solving the automatic detection problem.
+- **Kalman Filter Tracker:** Maintains temporal consistency by predicting vehicle positions and correcting with new detections.
 
 #### Results and Analysis
 
-This baseline was a monumental improvement, successfully identifying and tracking multiple vehicles automatically. However, its primary weakness was that its output was limited to rectangular bounding boxes, which do not provide the precise outlines required for true segmentation (Figure 2).
+This baseline represented a monumental improvement in performance and automation. As shown in Figure 2, the algorithm successfully identified and tracked multiple vehicles automatically, solving the core problems of the optical flow approach.
 
-> **Figure 2:** Successful Detection, Limited Precision. The YOLOv4 + Kalman Filter algorithm successfully detects and tracks multiple vehicles, but the imprecise bounding boxes include significant background, making them unsuitable for segmentation training.
+**Strengths:**
+
+- **Fully Automatic Detection:** Identified vehicles as they entered the scene with no human input.
+- **Robust Multi-Object Tracking:** Successfully tracked multiple vehicles simultaneously.
+- **High Accuracy:** Far more accurate at localizing vehicles than the optical flow method.
+
+**Weakness:**
+
+- **Bounding Boxes Only:** The output is limited to rectangular bounding boxes that include significant background, making them unsuitable for true segmentation.
+
+![Robust Detection, Limited Precision](media/2.jpg)
+
+**Figure 2: Robust Multi-Object Detection and its Limitation.** The YOLOv4 + Kalman Filter algorithm successfully detects and tracks multiple vehicles automatically. However, the output is limited to imprecise bounding boxes that include significant background, motivating the need for a true segmentation stage.
+
+#### Conclusion for Baseline 2
+
+This baseline successfully automated the localization and tracking of vehicles, proving the power of a deep learning approach. However, it only partially fulfilled the project's requirements, as it did not produce segmentation masks. This critical limitation directly motivated the development of our final, hybrid algorithm.
 
 ### 3.3 Final Algorithm: Hybrid Segmentation with Mask Refinement
 
