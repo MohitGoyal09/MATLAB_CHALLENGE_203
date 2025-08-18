@@ -86,7 +86,7 @@ To evaluate the effectiveness of our final algorithm, we performed a time trial 
 
 This represents an **85.7% reduction in labeling time**, a massive improvement in efficiency.
 
-For a complete technical breakdown and analysis, please see the full [**PROJECT REPORT**](REPORT.md).
+For a complete technical breakdown and analysis, please see the full [**PROJECT REPORT**](REPORT.MD).
 
 ## 📄 License
 
