@@ -10,7 +10,7 @@ Manually creating pixel-perfect segmentation masks for video is a notoriously sl
 The final result is a hybrid, multi-class system that combines the power of **YOLOv4 deep learning detection** with a **multi-stage classical computer vision pipeline** for mask refinement. The system automatically generates high-quality, temporally consistent pixel masks for multiple object classes, demonstrating a significant reduction in manual labeling time.
 
 ![Final Algorithm Demo](media/demo.gif)
-_**(This is a placeholder. You should record a screen capture of your algorithm and save it as `demo.gif` in the `media` folder.)**_
+
 
 ---
 
