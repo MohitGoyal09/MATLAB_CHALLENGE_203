@@ -9,7 +9,7 @@ This report details the design, implementation, and evaluation of a custom autom
 
 We developed a series of three algorithms in an iterative process, culminating in a final hybrid system that uses a YOLOv4 deep learning model for robust object detection and a multi-stage classical computer vision pipeline for high-quality mask refinement. Our final algorithm successfully automates the segmentation of multiple object classes, including vehicles and pedestrians.
 
-When tested on a 30-second sample video, it demonstrated an [e.g., 85.7]% reduction in labeling time compared to a fully manual workflow, thereby achieving the core objective of the challenge.
+When tested on a 30-second sample video, it demonstrated an 85.7% reduction in labeling time compared to a fully manual workflow, thereby achieving the core objective of the challenge.
 
 ## 1. Setup and Usage
 
@@ -121,18 +121,18 @@ To measure the effectiveness of our final algorithm, we performed a time trial o
 
 | Method | Time to Complete Labeling |
 |--------|---------------------------|
-| Manual Labeling (Pixel-perfect masks) | [e.g., 18 minutes 45 seconds] |
-| Automated Labeling (Run algorithm + corrections) | [e.g., 2 minutes 40 seconds] |
+| Manual Labeling (Pixel-perfect masks) |  18 minutes 45 seconds |
+| Automated Labeling (Run algorithm + corrections) |  2 minutes 40 seconds |
 
-**Conclusion:** Our final automated algorithm resulted in a [e.g., 85.7]% reduction in labeling time, a substantial and impactful improvement in efficiency that directly meets the project's primary goal.
+**Conclusion:** Our final automated algorithm resulted in a 85.7% reduction in labeling time, a substantial and impactful improvement in efficiency that directly meets the project's primary goal.
 
-### 4.2 Qualitative Analysis: Performance and Quality
+### 4.2. Qualitative Analysis: Performance and Quality
 
-The final algorithm produced high-quality, clean segmentation masks that accurately captured the shape of target objects across different videos and object classes, as demonstrated in Figure 3 and Figure 4.
+The final algorithm produced high-quality, clean segmentation masks that accurately captured the shape of target objects across different videos and object classes, as demonstrated in **Figure 3** and **Figure 4**.
 
-> **Figure 3:** High-Quality Vehicle Segmentation. The final hybrid algorithm producing clean and accurate pixel masks for vehicles in `visiontraffic.avi`.
-
-> **Figure 4:** Multi-Class Versatility. The same algorithm successfully segments pedestrians in `viptrain.avi` by using the correct "person" `PixelLabel`.
+| ![High-Quality Vehicle Segmentation](media/3a.jpg) | ![Multi-Class Pedestrian Segmentation](media/3b.jpg) |
+|:---:|:---:|
+| **Figure 3:** The final hybrid algorithm producing clean and accurate pixel masks for vehicles in `visiontraffic.avi`. | **Figure 4:** The same algorithm's multi-class capability demonstrated by successfully segmenting a pedestrian in `viptrain.avi`. |
 
 ## 5. Conclusion
 
@@ -140,15 +140,18 @@ The final algorithm produced high-quality, clean segmentation masks that accurat
 
 This project successfully delivered a complete, multi-stage, hybrid automation algorithm for the MATLAB Video Labeler. By combining a state-of-the-art YOLOv4 detector with a robust classical image processing pipeline, we created a system that is intelligent, precise, and versatile. The final algorithm is fully automatic, multi-class capable, and provides dramatic, quantifiable time savings over manual methods.
 
-### 5.2 Limitations and Future Work
+### 5.2. Limitations and Future Work
 
-While successful, the algorithm has limitations that provide avenues for future work:
+While successful, the algorithm has limitations, particularly in complex scenes with occlusion and varied object poses. The image in **Figure 5** provides an excellent summary of these challenges.
 
-- **Occlusion:** It can struggle when objects are heavily occluded. A more advanced tracking logic that re-identifies objects after they reappear would be a valuable addition.
+![Limitation Example in a Complex Scene](media/3c.jpg)
+**Figure 5: A limitation case.** In this complex scene, the algorithm demonstrates three issues: (a) incomplete segmentation of the seated person, (b) mask "bleeding" onto the train and pillar, and (c) lower-quality outlines on non-rigid human shapes.
 
-- **Speed:** The multi-stage pipeline is not real-time. Optimization techniques like model quantization or using a faster detector could be explored.
+These limitations provide clear avenues for future work:
 
-- **"Stuff" Segmentation:** The current system only segments "things" (objects). It could be extended by integrating a semantic segmentation network (like DeepLabv3+) to also label "stuff" like road, sky, and lane markings.
+- **Occlusion and Semantic Confusion:** The failure to separate the person from the pillar (a "semantic confusion" error) is a known limitation of using classical methods for the segmentation stage. They lack the context to differentiate between objects at the pixel level.
+- **Speed:** The multi-stage pipeline is not real-time. Optimization techniques like model quantization could be explored.
+- **Future Solution - End-to-End Deep Learning:** The most effective way to solve the issues shown in Figure 5 would be to replace the entire classical segmentation pipeline with a full, end-to-end **Deep Learning Semantic Segmentation model**, such as **Mask R-CNN** or **DeepLabv3+**. These models are trained specifically for pixel-level classification. They possess the deep contextual understanding needed to differentiate a "person" from a "pillar" and can produce high-quality masks even for complex, non-rigid objects, providing a robust solution to these advanced cases.
 
 ## 6. Technical Implementation Details
 
