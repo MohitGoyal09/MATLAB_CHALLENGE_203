@@ -145,6 +145,7 @@ This project successfully delivered a complete, multi-stage, hybrid automation a
 While successful, the algorithm has limitations, particularly in complex scenes with occlusion and varied object poses. The image in **Figure 5** provides an excellent summary of these challenges.
 
 ![Limitation Example in a Complex Scene](media/3c.jpg)
+
 **Figure 5: A limitation case.** In this complex scene, the algorithm demonstrates three issues: (a) incomplete segmentation of the seated person, (b) mask "bleeding" onto the train and pillar, and (c) lower-quality outlines on non-rigid human shapes.
 
 These limitations provide clear avenues for future work:
