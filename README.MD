@@ -59,13 +59,7 @@ This repository contains the complete evolution of our solution, located under t
 ### **2. Running the Project**
 
 1. Open MATLAB and navigate to the root folder of this repository.
-2. Run the included setup script in the Command Window. This will configure the MATLAB path and launch the Video Labeler app for you.
-
-    ```matlab
-    setup_environment
-    ```
-
-3. Inside the Video Labeler app:
+2. Inside the Video Labeler app:
     * Load a video source (e.g., `visiontraffic.avi` or `viptrain.avi`).
     * Create `PixelLabel` definitions for the classes you want to detect (e.g., "car", "person"). **The names must be an exact match.**
     * Navigate to the **Automate** tab.
