@@ -24,9 +24,8 @@ When tested on a 30-second sample video, it demonstrated an 85.7% reduction in l
 ### 1.2 How to Run
 
 1. Launch MATLAB and navigate to the project's root folder.
-2. Run the `setup_environment.m` script to configure the path and open the Video Labeler.
-3. In the Video Labeler, load a video and create `PixelLabel` definitions for the target classes (e.g., "car", "person").
-4. Navigate to the **Automate** tab, **Refresh list**, and select the desired algorithm.
+2. In the Video Labeler, load a video and create `PixelLabel` definitions for the target classes (e.g., "car", "person").
+3. Navigate to the **Automate** tab, **Refresh list**, and select the desired algorithm.
 
 ## 2. Introduction
 
