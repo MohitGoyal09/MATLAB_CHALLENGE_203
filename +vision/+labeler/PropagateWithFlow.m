@@ -4,7 +4,7 @@ classdef PropagateWithFlow < vision.labeler.AutomationAlgorithm & vision.labeler
 %   This version uses the robust opticalFlowFarneback object.
 
     properties(Constant)
-        % --- THE NAME HAS CHANGED ---
+       
         Name = 'Propagate ROI with Flow (Robust)'; 
         Description = 'Tracks a single rectangular ROI using the Farneback optical flow method.';
         UserDirections = {...
@@ -36,7 +36,7 @@ classdef PropagateWithFlow < vision.labeler.AutomationAlgorithm & vision.labeler
 
     methods
         function initialize(algObj, I, labelsToAutomate)
-            % --- THIS IS THE FIX ---
+            
             algObj.OpticalFlow = opticalFlowFarneback;
             
             algObj.LabelNameToAutomate = labelsToAutomate.Name{1};
@@ -49,7 +49,7 @@ classdef PropagateWithFlow < vision.labeler.AutomationAlgorithm & vision.labeler
         function autoLabels = run(algObj, I)
             currentGrayFrame = im2gray(I);
             
-            % --- THIS IS THE FIX ---
+          
             flow = algObj.OpticalFlow.estimateFlow(currentGrayFrame);
             
             newBBox = algObj.predictBBox(algObj.PreviousBBox, flow.Vx, flow.Vy);

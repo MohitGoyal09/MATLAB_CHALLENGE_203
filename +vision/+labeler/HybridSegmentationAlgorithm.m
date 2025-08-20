@@ -50,9 +50,6 @@ classdef HybridSegmentationAlgorithm < vision.labeler.AutomationAlgorithm & visi
                 
                 roiGray = im2gray(roi);
                 
-                % =============================================================
-                % --- THE FINAL MASK CLEANING PIPELINE IS HERE ---
-                % =============================================================
                 
                 % Step 2A: Get a rough initial mask.
                 initialMask = imbinarize(roiGray, 'adaptive', 'ForegroundPolarity', 'dark', 'Sensitivity', 0.4);

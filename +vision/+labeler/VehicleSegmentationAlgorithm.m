@@ -3,7 +3,7 @@ classdef VehicleSegmentationAlgorithm < vision.labeler.AutomationAlgorithm & vis
 % This is the final, robust version with stable tracking logic.
 
     properties(Constant)
-        % --- Name updated to reflect the final version ---
+        
         Name = 'Vehicle Tracker (Stable)';
         Description = 'Detects vehicles with YOLOv4 and uses a stable Kalman Filter for tracking.';
         UserDirections = {'This algorithm automatically detects and tracks vehicles.', 'Press RUN to execute the algorithm.'};
@@ -74,9 +74,6 @@ classdef VehicleSegmentationAlgorithm < vision.labeler.AutomationAlgorithm & vis
                 algObj.NextTrackID = algObj.NextTrackID + 1;
             end
             
-            % =============================================================
-            % --- THE FIXED, STABLE TRACKING LOGIC IS HERE ---
-            % =============================================================
             if ~isempty(algObj.ActiveTracks)
                 % A track is considered "lost" only if it has been invisible
                 % for 15 consecutive frames. This makes the tracker patient.
