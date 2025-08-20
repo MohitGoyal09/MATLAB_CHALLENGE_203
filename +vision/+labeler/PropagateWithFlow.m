@@ -1,7 +1,5 @@
 classdef PropagateWithFlow < vision.labeler.AutomationAlgorithm & vision.labeler.mixin.Temporal
-%PropagateWithFlow Tracks a single rectangular ROI using Optical Flow.
-%
-%   This version uses the robust opticalFlowFarneback object.
+
 
     properties(Constant)
        

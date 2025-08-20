@@ -1,6 +1,5 @@
 classdef VehicleSegmentationAlgorithm < vision.labeler.AutomationAlgorithm & vision.labeler.mixin.Temporal
-% VehicleSegmentationAlgorithm - Automated vehicle detection and tracking.
-% This is the final, robust version with stable tracking logic.
+
 
     properties(Constant)
         

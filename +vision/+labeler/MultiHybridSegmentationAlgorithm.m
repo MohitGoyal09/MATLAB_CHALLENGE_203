@@ -1,7 +1,5 @@
 classdef MultiHybridSegmentationAlgorithm < vision.labeler.AutomationAlgorithm & vision.labeler.mixin.Temporal
-% HybridSegmentationAlgorithm - The final, multi-class, presentation-quality version.
-% This algorithm detects multiple object classes (cars, people, etc.) and
-% applies the corresponding PixelLabel for each, creating a multi-class segmentation.
+
 
     properties(Constant)
         Name = 'Multi-Class Hybrid Segmentation';
@@ -61,7 +59,7 @@ classdef MultiHybridSegmentationAlgorithm < vision.labeler.AutomationAlgorithm &
                     continue; % Skip if not a class of interest.
                 end
                 
-                % --- DYNAMIC LABEL LOOKUP ---
+                
                 % Find the PixelLabel definition that matches the detected class name.
                 isMatch = strcmp(currentClassName, {allPixelLabelDefs.Name});
                 if ~any(isMatch)
@@ -70,7 +68,7 @@ classdef MultiHybridSegmentationAlgorithm < vision.labeler.AutomationAlgorithm &
                 end
                 targetLabelDef = allPixelLabelDefs(isMatch);
                 targetPixelID = targetLabelDef.PixelLabelID;
-                % --- END LOOKUP ---
+                
                 
                 % Now, perform the full segmentation pipeline for this object.
                 bbox_int = floor(bboxes(i, :));
